@@ -171,11 +171,11 @@ function desensitize_profile() {
 		}
 		if (exists(profile, "proxy-providers")) {
 			for (let x in profile["proxy-providers"]) {
-				if (exists(x, "url")) {
-					x["url"] = "*";
+				if (exists(profile["proxy-providers"][x], "url")) {
+					profile["proxy-providers"][x]["url"] = "*";
 				}
-				if (exists(x, "payload")) {
-					desensitize_proxies(x["payload"]);
+				if (exists(profile["proxy-providers"][x], "payload")) {
+					desensitize_proxies(profile["proxy-providers"][x]["payload"]);
 				}
 			}
 		}
@@ -201,12 +201,12 @@ ip rule list
 \`\`\`
 TPROXY: 
 `
-ip route list table "$TPROXY_ROUTE_TABLE"
+ip route list table "$(uci get nikki.routing.tproxy_route_table)"
 `
 
 TUN: 
 `
-ip route list table "$TUN_ROUTE_TABLE"
+ip route list table "$(uci get nikki.routing.tun_route_table)"
 `
 \`\`\`
 ## ip6 rule
@@ -219,12 +219,12 @@ ip -6 rule list
 \`\`\`
 TPROXY: 
 `
-ip -6 route list table "$TPROXY_ROUTE_TABLE"
+ip -6 route list table "$(uci get nikki.routing.tproxy_route_table)"
 `
 
 TUN: 
 `
-ip -6 route list table "$TUN_ROUTE_TABLE"
+ip -6 route list table "$(uci get nikki.routing.tun_route_table)"
 `
 \`\`\`
 ## nftables
