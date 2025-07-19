@@ -8,12 +8,10 @@
                 "luci.nikki": [ "*" ]
             },
             "file": {
-                "/etc/nikki/profiles/*.yaml": ["read"],
-                "/etc/nikki/profiles/*.yml": ["read"],
-                "/etc/nikki/subscriptions/*.yaml": ["read"],
-                "/etc/nikki/subscriptions/*.yml": ["read"],
-                "/etc/nikki/mixin.yaml": ["read"],
-                "/etc/nikki/run/config.yaml": ["read"],
+                "/etc/nikki/profiles/*.json": ["read"],
+                "/etc/nikki/subscriptions/*.json": ["read"],
+                "/etc/nikki/mixin.json": ["read"],
+                "/etc/nikki/run/config.json": ["read"],
                 "/etc/nikki/run/providers/rule/*": ["read"],
                 "/etc/nikki/run/providers/proxy/*": ["read"],
                 "/etc/nikki/nftables/reserved_ip.nft": ["read"],
@@ -24,12 +22,10 @@
         "write": {
             "uci": [ "nikki" ],
             "file": {
-                "/etc/nikki/profiles/*.yaml": ["write"],
-                "/etc/nikki/profiles/*.yml": ["write"],
-                "/etc/nikki/subscriptions/*.yaml": ["write"],
-                "/etc/nikki/subscriptions/*.yml": ["write"],
-                "/etc/nikki/mixin.yaml": ["write"],
-                "/etc/nikki/run/config.yaml": ["write"],
+                "/etc/nikki/profiles/*.json": ["write"],
+                "/etc/nikki/subscriptions/*.json": ["write"],
+                "/etc/nikki/mixin.json": ["write"],
+                "/etc/nikki/run/config.json": ["write"],
                 "/etc/nikki/run/providers/rule/*": ["write"],
                 "/etc/nikki/run/providers/proxy/*": ["write"],
                 "/etc/nikki/nftables/reserved_ip.nft": ["write"],
