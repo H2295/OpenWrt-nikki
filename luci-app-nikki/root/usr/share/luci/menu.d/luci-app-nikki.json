@@ -25,14 +25,6 @@
             "path": "nikki/profile"
         }
     },
-    "admin/services/nikki/mixin": {
-        "title": "Mixin Config",
-        "order": 30,
-        "action": {
-            "type": "view",
-            "path": "nikki/mixin"
-        }
-    },
     "admin/services/nikki/proxy": {
         "title": "Proxy Config",
         "order": 40,
