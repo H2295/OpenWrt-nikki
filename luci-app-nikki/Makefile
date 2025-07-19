@@ -13,7 +13,7 @@ define Package/luci-app-nikki/conffiles
 /etc/nikki/nftables/reserved_ip6.nft
 endef
 
-define Package/nikki/install
+define Package/luci-app-nikki/install
 	$(INSTALL_DIR) $(1)/etc/nikki
 	$(INSTALL_DIR) $(1)/etc/nikki/ucode
 	$(INSTALL_DIR) $(1)/etc/nikki/scripts
