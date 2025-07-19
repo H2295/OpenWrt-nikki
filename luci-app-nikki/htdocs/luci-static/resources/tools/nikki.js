@@ -54,9 +54,9 @@ const callNikkiDebug = rpc.declare({
 const homeDir = '/etc/nikki';
 const profilesDir = `${homeDir}/profiles`;
 const subscriptionsDir = `${homeDir}/subscriptions`;
-const mixinFilePath = `${homeDir}/mixin.yaml`;
+//const mixinFilePath = `${homeDir}/mixin.yaml`;
 const runDir = `${homeDir}/run`;
-const runProfilePath = `${runDir}/config.yaml`;
+const runProfilePath = `${runDir}/config.json`;
 const providersDir = `${runDir}/providers`;
 const ruleProvidersDir = `${providersDir}/rule`;
 const proxyProvidersDir = `${providersDir}/proxy`;
@@ -72,7 +72,7 @@ return baseclass.extend({
     homeDir: homeDir,
     profilesDir: profilesDir,
     subscriptionsDir: subscriptionsDir,
-    mixinFilePath: mixinFilePath,
+    //mixinFilePath: mixinFilePath,
     runDir: runDir,
     runProfilePath: runProfilePath,
     ruleProvidersDir: ruleProvidersDir,
@@ -108,8 +108,8 @@ return baseclass.extend({
     },
 
     api: async function (method, path, query, body) {
-        const profile = await callNikkiProfile({ 'external-controller': null, 'secret': null });
-        const apiListen = profile['external-controller'];
+        const profile = await callNikkiProfile({ 'external_controller': null, 'secret': null });
+        const apiListen = profile['external_controller'];
         const apiSecret = profile['secret'] ?? '';
         const apiPort = apiListen.substring(apiListen.lastIndexOf(':') + 1);
         const url = `http://${window.location.hostname}:${apiPort}${path}`;
@@ -124,7 +124,7 @@ return baseclass.extend({
     openDashboard: async function () {
         const profile = await callNikkiProfile({ 'external-ui-name': null, 'external-controller': null, 'secret': null });
         const uiName = profile['external-ui-name'];
-        const apiListen = profile['external-controller'];
+        const apiListen = profile['external_controller'];
         const apiSecret = profile['secret'] ?? '';
         const apiPort = apiListen.substring(apiListen.lastIndexOf(':') + 1);
         const params = {
