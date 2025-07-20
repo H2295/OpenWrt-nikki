@@ -27,7 +27,7 @@
     },
     "admin/services/nikki/proxy": {
         "title": "Proxy Config",
-        "order": 40,
+        "order": 30,
         "action": {
             "type": "view",
             "path": "nikki/proxy"
@@ -35,7 +35,7 @@
     },
     "admin/services/nikki/editor": {
         "title": "Editor",
-        "order": 50,
+        "order": 40,
         "action": {
             "type": "view",
             "path": "nikki/editor"
