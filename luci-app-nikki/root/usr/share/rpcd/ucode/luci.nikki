@@ -45,7 +45,7 @@ const methods = {
         }
         return profile;
     }
-}
+},
 	update_subscription: {
 		args: { section_id: 'section_id' },
 		call: function(req) {
