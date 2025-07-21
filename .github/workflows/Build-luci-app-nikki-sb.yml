@@ -29,7 +29,7 @@ jobs:
 
       - name: Prepare luci-app-nikki for IPK
         run: |
-          cd openwrt-sdk-ipk/packge
+          cd openwrt-sdk-ipk/package
           git clone -b sbox https://github.com/H2295/OpenWrt-nikki.git
           cd
           #mkdir -p openwrt-sdk-ipk/package/luci-app-nikki
@@ -58,7 +58,7 @@ jobs:
 
       - name: Prepare luci-app-nikki for APK
         run: |
-          cd openwrt-sdk-apk/packge
+          cd openwrt-sdk-apk/package
           git clone -b sbox https://github.com/H2295/OpenWrt-nikki.git
           cd
           #mkdir -p openwrt-sdk-apk/package/luci-app-nikki
