@@ -18,14 +18,14 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y build-essential clang flex bison gawk gcc-multilib g++-multilib \
-            gettext git libncurses-dev libssl-dev python3 rsync unzip zlib1g-dev file
+            gettext git libncurses-dev libssl-dev python3 rsync unzip zlib1g-dev zstd file
 
       # 编译 IPK 包
       - name: Download OpenWrt 23.05 (IPK) SDK
         run: |
-          wget https://downloads.openwrt.org/releases/23.05.3/targets/x86/64/openwrt-sdk-23.05.3-x86-64_gcc-12.3.0_musl.Linux-x86_64.tar.xz
-          tar -xf openwrt-sdk-23.05.3-x86-64_gcc-12.3.0_musl.Linux-x86_64.tar.xz
-          mv openwrt-sdk-23.05.3-x86-64_gcc-12.3.0_musl.Linux-x86_64 openwrt-sdk-ipk
+          wget https://downloads.immortalwrt.org/releases/24.10.2/targets/x86/64/immortalwrt-sdk-24.10.2-x86-64_gcc-13.3.0_musl.Linux-x86_64.tar.zst
+          tar --use-compress-program=unzstd -xf immortalwrt-sdk-24.10.2-x86-64_gcc-13.3.0_musl.Linux-x86_64.tar.zst
+          mv immortalwrt-sdk-24.10.2-x86-64_gcc-13.3.0_musl.Linux-x86_64 openwrt-sdk-ipk
 
       - name: Prepare luci-app-nikki for IPK
         run: |
