@@ -29,18 +29,19 @@ jobs:
 
       - name: Prepare luci-app-nikki for IPK
         run: |
-          cd openwrt-sdk-ipk/package
-          git clone -b sbox https://github.com/H2295/OpenWrt-nikki.git
-          cd
-          #mkdir -p openwrt-sdk-ipk/package/luci-app-nikki
-          #cp -r luci-app-nikki/* openwrt-sdk-ipk/package/luci-app-nikki/
-
+          
+          mkdir -p openwrt-sdk-ipk/package/luci-app-nikki
+          cp -r luci-app-nikki/* openwrt-sdk-ipk/package/luci-app-nikki/
+          ls openwrt-sdk-ipk/package/luci-app-nikki/
+          #cd openwrt-sdk-ipk/package
+          #git clone -b sbox https://github.com/H2295/OpenWrt-nikki.git
+          #cd
       - name: Update feeds & build luci-app-nikki (IPK)   
         run: |
           cd openwrt-sdk-ipk
           ./scripts/feeds update -a
           ./scripts/feeds install -a
-          make package/OpenWrt-nikki/luci-app-nikki/compile V=s
+          make package/luci-app-nikki/compile V=s
 
       - name: Upload IPK
         uses: actions/upload-artifact@v4
