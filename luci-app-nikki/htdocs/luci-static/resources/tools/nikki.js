@@ -111,7 +111,7 @@ return baseclass.extend({
         const profile = await callNikkiProfile({ 'external_controller': null, 'secret': null });
         const apiListen = profile['external_controller'];
         const apiSecret = profile['secret'] ?? '';
-        const apiPort = apiListen.substring(apiListen.lastIndexOf(':') + 1);
+        const apiPort = '9090';
         const url = `http://${window.location.hostname}:${apiPort}${path}`;
         return request.request(url, {
             method: method,
@@ -122,11 +122,10 @@ return baseclass.extend({
     },
 
     openDashboard: async function () {
-        const profile = await callNikkiProfile({ 'external-ui-name': null, 'external-controller': null, 'secret': null });
-        const uiName = profile['external-ui-name'];
+        const profile = await callNikkiProfile({ 'external-controller': null, 'secret': null });
         const apiListen = profile['external_controller'];
         const apiSecret = profile['secret'] ?? '';
-        const apiPort = apiListen.substring(apiListen.lastIndexOf(':') + 1);
+        const apiPort = '9090';
         const params = {
             host: window.location.hostname,
             hostname: window.location.hostname,
@@ -136,7 +135,7 @@ return baseclass.extend({
         const query = new URLSearchParams(params).toString();
         let url;
         if (uiName) {
-            url = `http://${window.location.hostname}:${apiPort}/ui/${uiName}/?${query}`;
+            url = `http://${window.location.hostname}:${apiPort}/${uiName}/?${query}`;
         } else {
             url = `http://${window.location.hostname}:${apiPort}/ui/?${query}`;
         }
