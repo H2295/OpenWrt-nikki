@@ -78,12 +78,12 @@ return view.extend({
             return nikki.restart();
         };
 
-        o = s.option(form.Button, 'update_dashboard');
-        o.inputstyle = 'positive';
-        o.inputtitle = _('Update Dashboard');
-        o.onclick = function () {
-            return nikki.updateDashboard();
-        };
+#        o = s.option(form.Button, 'update_dashboard');
+#        o.inputstyle = 'positive';
+#        o.inputtitle = _('Update Dashboard');
+#        o.onclick = function () {
+#            return nikki.updateDashboard();
+#        };
 
         o = s.option(form.Button, 'open_dashboard');
         o.inputtitle = _('Open Dashboard');
