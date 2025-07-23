@@ -1,0 +1,91 @@
+{
+  "route":{
+   "default_domain_resolver": "direct-dns",
+   "rules": [
+     {"inbound":["dns-in", "redirect-in","tproxy-in"],"action":"sniff"},
+     {"inbound":"dns-in","action":"hijack-dns"},
+     {"clash_mode":"Direct","action":"route","outbound":"direct"},
+     {"clash_mode":"Global","action":"route","outbound":"proxy"},
+     {"ip_is_private": true, "outbound": "direct"},
+     { "rule_set": "custom-proxy", "action":"route","outbound": "proxy" },
+     { "rule_set": "custom-direct", "action":"route","outbound": "direct" },
+     {"rule_set": ["geosite-chat","geosite-youtube","geosite-google","geosite-telegram","geolocation-!cn"],"action": "route","outbound": "proxy"},
+     { "rule_set": ["geoip-google", "geoip-telegram"], "action":"route","outbound": "proxy" }
+   ],
+   "final": "direct",
+   "rule_set": [
+       { "tag": "geosite-chat", "type": "remote", "format": "binary", "url": "https://ghfast.top/https://raw.github.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-ai-chat-!cn.srs", "download_detour": "direct","update_interval": "3d" },     
+       { "tag": "geosite-youtube", "type": "remote", "format": "binary", "url": "https://ghfast.top/https://raw.github.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/youtube.srs", "download_detour": "direct","update_interval": "3d" },
+       { "tag": "geosite-google", "type": "remote", "format": "binary", "url": "https://ghfast.top/https://raw.github.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/google.srs", "download_detour": "direct","update_interval": "3d" },
+       { "tag": "geosite-telegram", "type": "remote", "format": "binary", "url": "https://ghfast.top/https://raw.github.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/telegram.srs", "download_detour": "direct","update_interval": "3d" },
+       { "tag": "geolocation-!cn", "type": "remote", "format": "binary", "url": "https://ghfast.top/https://raw.github.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/geolocation-!cn.srs", "download_detour": "direct","update_interval": "3d" },
+       { "tag": "geoip-google", "type": "remote", "format": "binary", "url": "https://ghfast.top/https://raw.github.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/google.srs", "download_detour": "direct","update_interval": "3d" },
+       { "tag": "geoip-telegram", "type": "remote", "format": "binary", "url": "https://ghfast.top/https://raw.github.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/telegram.srs", "download_detour": "direct","update_interval": "3d" },     
+       { "tag": "custom-direct",
+         "type": "inline",
+         "rules": [
+           {
+             "domain": "dynv6.com",
+             "domain_suffix": [
+               "dynv6.net",
+               "dynv6.com",
+               "syncthing.net",
+               "tailscale.io",
+               "tailscale.com"
+             ]
+            }
+           ]
+         },
+       { "tag": "custom-proxy",
+         "type": "inline",
+         "rules": [{
+           "domain": ["github.com","dl.tailscale.com"],
+           "domain_suffix": ["immortalwrt.org","github.com"]
+         }]
+       }
+    ]
+ },
+  "log": {
+    "level": "warn",
+    "timestamp": true
+  },
+  "dns": {
+    "servers": [
+      {"tag": "proxy-dns","type": "tcp","server": "8.8.8.8","server_port": 53,"detour": "proxy"},
+      {"tag": "direct-dns","type": "udp","server": "223.5.5.5","server_port": 53},
+      {"tag": "local-dns","type": "local"}
+    ],
+    "rules": [
+      {"clash_mode": "Global","action": "route","server": "proxy-dns"},
+      {"clash_mode": "Direct","action": "route","server": "local-dns"},
+      {"rule_set": ["geolocation-!cn","custom-proxy"],"action": "route","server": "proxy-dns"},
+      {"rule_set": "custom-direct","action": "route","server": "direct-dns"}
+    ],
+    "final": "local-dns",
+    "strategy": "prefer_ipv4"
+  },
+  
+  "inbounds": [
+    {"type": "direct","tag": "dns-in","listen": "::","listen_port": 1053},
+    {"type": "tproxy","tag": "tproxy-in","listen": "::","listen_port": 7892},
+    {"type": "redirect","tag": "redirect-in","listen": "::","listen_port": 7891},
+    {"type": "mixed","listen": "127.0.0.1","listen_port": 2080,"users": []}
+  ],
+  "experimental": {
+    "clash_api": {
+      "external_controller": "0.0.0.0:9090",
+      "external_ui": "ui",
+      "secret": "qaz7410",
+      "external_ui_download_url": "https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip",
+      "external_ui_download_detour": "proxy",
+      "default_mode": "rule"
+    },
+    "cache_file": {
+      "enabled": true,
+      "store_fakeip": false
+    }
+  },
+  "outbounds": []
+    
+     
+}
