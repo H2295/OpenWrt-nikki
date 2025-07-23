@@ -2,9 +2,6 @@ name: Build luci-app-nikki for OpenWrt (ipk & apk)
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - sbox
 
 jobs:
   build:
