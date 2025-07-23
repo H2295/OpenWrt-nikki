@@ -122,7 +122,8 @@ return baseclass.extend({
     },
 
     openDashboard: async function () {
-        const profile = await callNikkiProfile({ 'external-controller': null, 'secret': null });
+        const profile = await callNikkiProfile({ 'external-ui-name': null,  'external-controller': null, 'secret': null });
+        const uiName = profile['external-ui-name'];
         const apiListen = profile['external_controller'];
         const apiSecret = profile['secret'] ?? '';
         const apiPort = '9090';
