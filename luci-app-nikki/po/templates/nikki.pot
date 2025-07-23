@@ -814,7 +814,7 @@ msgid "Total"
 msgstr ""
 
 #: applications/luci-app-nikki/htdocs/luci-static/resources/view/nikki/app.js:38
-msgid "Transparent Proxy with Mihomo on OpenWrt."
+msgid "Transparent Proxy with sing-box on OpenWrt.Redirect_port:7891.Tproxy_port:7892.DNS_port:1053"
 msgstr ""
 
 #: applications/luci-app-nikki/htdocs/luci-static/resources/view/nikki/mixin.js:327
