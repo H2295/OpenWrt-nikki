@@ -339,8 +339,8 @@ update_subscription() {
 	log "Profile" "Update subscription: $subscription_name."
 	local success
 	local subscription_header_tmpfile; subscription_header_tmpfile="$TEMP_DIR/$subscription_section.header"
-	local subscription_tmpfile; subscription_tmpfile="$TEMP_DIR/$subscription_section.yaml"
-	local subscription_file; subscription_file="$SUBSCRIPTIONS_DIR/$subscription_section.yaml"
+	local subscription_tmpfile; subscription_tmpfile="$TEMP_DIR/$subscription_section.json"
+	local subscription_file; subscription_file="$SUBSCRIPTIONS_DIR/$subscription_section.json"
 	if (curl -s -f -m 120 --connect-timeout 15 --retry 3 -L -X GET -A "$subscription_user_agent" -D "$subscription_header_tmpfile" -o "$subscription_tmpfile" "$subscription_url"); then
 		log "Profile" "Subscription download successful."
 		if (jq 'has("inbounds")' "$subscription_tmpfile" > /dev/null 2>&1); then
