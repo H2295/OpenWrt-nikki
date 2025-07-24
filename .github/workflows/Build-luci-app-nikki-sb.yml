@@ -46,15 +46,15 @@ jobs:
         with:
           name: luci-app-nikki-ipk
           path: |
-            openwrt-sdk-ipk/bin/packages/*/base/luci-app-nikki_*.ipk
-            openwrt-sdk-ipk/bin/packages/*/base/luci-i18n-nikki_*.ipk
+            openwrt-sdk-ipk/bin/packages/*/base/luci-*-nikki_*.ipk
+       
 
       # 编译 APK 包
       - name: Download OpenWrt snapshot (APK) SDK
         run: |
           wget https://downloads.immortalwrt.org/snapshots/targets/x86/64/immortalwrt-sdk-x86-64_gcc-14.3.0_musl.Linux-x86_64.tar.zst
           tar --use-compress-program=unzstd -xf immortalwrt-sdk-x86-64_gcc-14.3.0_musl.Linux-x86_64.tar.zst
-          mv openwrt-sdk-x86-64_gcc-13.2.0_musl.Linux-x86_64 openwrt-sdk-apk
+          mv immortalwrt-sdk-x86-64_gcc-14.3.0_musl.Linux-x86_64 openwrt-sdk-apk
 
       - name: Prepare luci-app-nikki for APK
         run: |
@@ -75,5 +75,5 @@ jobs:
         with:
           name: luci-app-nikki-apk
           path: |
-            openwrt-sdk-apk/bin/packages/*/base/luci-app-nikki_*.apk
-            openwrt-sdk-ipk/bin/packages/*/base/luci-i18n-nikki_*.apk
+            openwrt-sdk-apk/bin/packages/*/base/luci-*-nikki_*.apk
+            
