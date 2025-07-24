@@ -1,0 +1,79 @@
+name: Build luci-app-nikki for OpenWrt (ipk & apk)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential clang flex bison gawk gcc-multilib g++-multilib \
+            gettext git libncurses-dev libssl-dev python3 rsync unzip zlib1g-dev zstd file
+
+      # 编译 IPK 包
+      - name: Download OpenWrt 23.05 (IPK) SDK
+        run: |
+          wget https://downloads.immortalwrt.org/releases/24.10.2/targets/x86/64/immortalwrt-sdk-24.10.2-x86-64_gcc-13.3.0_musl.Linux-x86_64.tar.zst
+          tar --use-compress-program=unzstd -xf immortalwrt-sdk-24.10.2-x86-64_gcc-13.3.0_musl.Linux-x86_64.tar.zst
+          mv immortalwrt-sdk-24.10.2-x86-64_gcc-13.3.0_musl.Linux-x86_64 openwrt-sdk-ipk
+
+      - name: Prepare luci-app-nikki for IPK
+        run: |
+          
+          mkdir -p openwrt-sdk-ipk/package/luci-app-nikki
+          cp -r luci-app-nikki/* openwrt-sdk-ipk/package/luci-app-nikki/
+          ls openwrt-sdk-ipk/package/luci-app-nikki/
+          #cd openwrt-sdk-ipk/package
+          #git clone -b sbox https://github.com/H2295/OpenWrt-nikki.git
+          #cd
+      - name: Update feeds & build luci-app-nikki (IPK)   
+        run: |
+          cd openwrt-sdk-ipk
+          ./scripts/feeds update -a
+          ./scripts/feeds install -a
+          make defconfig
+          make package/luci-app-nikki/compile V=s
+
+      - name: Upload IPK
+        uses: actions/upload-artifact@v4
+        with:
+          name: luci-app-nikki-ipk
+          path: |
+            openwrt-sdk-ipk/bin/packages/*/base/luci-app-nikki_*.ipk
+            openwrt-sdk-ipk/bin/packages/*/base/luci-i18n-nikki_*.ipk
+
+      # 编译 APK 包
+      - name: Download OpenWrt snapshot (APK) SDK
+        run: |
+          wget https://downloads.immortalwrt.org/snapshots/targets/x86/64/immortalwrt-sdk-x86-64_gcc-14.3.0_musl.Linux-x86_64.tar.zst
+          tar --use-compress-program=unzstd -xf immortalwrt-sdk-x86-64_gcc-14.3.0_musl.Linux-x86_64.tar.zst
+          mv openwrt-sdk-x86-64_gcc-13.2.0_musl.Linux-x86_64 openwrt-sdk-apk
+
+      - name: Prepare luci-app-nikki for APK
+        run: |
+          mkdir -p openwrt-sdk-apk/package/luci-app-nikki
+          cp -r luci-app-nikki/* openwrt-sdk-apk/package/luci-app-nikki/
+
+      - name: Update feeds & build luci-app-nikki (APK)
+        run: |
+          cd openwrt-sdk-apk
+          ./scripts/feeds update -a
+          ./scripts/feeds install -a
+          make defconfig
+          make package/luci-app-nikki/compile V=s
+          
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: luci-app-nikki-apk
+          path: |
+            openwrt-sdk-apk/bin/packages/*/base/luci-app-nikki_*.apk
+            openwrt-sdk-ipk/bin/packages/*/base/luci-i18n-nikki_*.apk
