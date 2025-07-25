@@ -26,7 +26,7 @@ define Package/luci-app-nikki/install
 	$(INSTALL_DIR) $(1)/etc/nikki/run/providers/proxy
 endef
 
-define Package/nikki/postrm
+define Package/luci-app-nikki/postrm
 #!/bin/sh
 if [ -z $${IPKG_INSTROOT} ]; then
 	uci -q batch <<-EOF > /dev/null
