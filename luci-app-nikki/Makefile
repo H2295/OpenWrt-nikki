@@ -5,7 +5,7 @@ PKG_VERSION:=1.23.2
 
 LUCI_TITLE:=LuCI Support for nikki
 LUCI_PKGARCH:=all
-LUCI_DEPENDS:=+luci-base +ca-bundle +curl +jq firewall4 +ip-full +kmod-inet-diag +kmod-nft-socket +kmod-nft-tproxy +kmod-tun
+LUCI_DEPENDS:=+luci-base +sing-box +ca-bundle +curl +jq firewall4 +ip-full +kmod-inet-diag +kmod-nft-socket +kmod-nft-tproxy +kmod-tun
 
 define Package/luci-app-nikki/conffiles
 /etc/config/nikki
