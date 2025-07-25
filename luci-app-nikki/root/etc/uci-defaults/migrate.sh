@@ -2,6 +2,8 @@
 
 . "$IPKG_INSTROOT/etc/nikki/scripts/include.sh"
 
+mkdir -p /etc/nikki/run
+mkdir -p /etc/nikki/subscriptions
 # since v1.19.1
 
 proxy_fake_ip_ping_hijack=$(uci -q get nikki.proxy.fake_ip_ping_hijack); [ -z "$proxy_fake_ip_ping_hijack" ] && uci set nikki.proxy.fake_ip_ping_hijack=0
