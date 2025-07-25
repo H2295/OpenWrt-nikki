@@ -46,7 +46,8 @@ jobs:
         with:
           name: luci-app-nikki-ipk
           path: |
-            openwrt-sdk-ipk/bin/packages/*/base/luci-*-nikki_*.ipk
+            openwrt-sdk-ipk/bin/packages/*/base/luci-app-nikki_*.ipk
+            openwrt-sdk-ipk/bin/packages/*/base/luci-i18n-nikki_*.ipk
        
 
       # 编译 APK 包
@@ -68,6 +69,7 @@ jobs:
           ./scripts/feeds install -a
           make defconfig
           make package/luci-app-nikki/compile V=s
+          ls -l bin/packages/x86_64/base/luci*
           
 
       - name: Upload APK
@@ -75,4 +77,6 @@ jobs:
         with:
           name: luci-app-nikki-apk
           path: |
-            openwrt-sdk-apk/bin/packages/*/base/luci-*-nikki_*.apk
+            openwrt-sdk-apk/bin/packages/*/base/luci-app-nikki*.apk
+            openwrt-sdk-apk/bin/packages/*/base/luci-i18n-nikki*.apk
+
