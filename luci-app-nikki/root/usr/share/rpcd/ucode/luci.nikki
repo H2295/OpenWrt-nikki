@@ -33,16 +33,21 @@ const methods = {
 		}
 	},
 	profile: {
-    call: function(req) {
-        const filepath = '/etc/nikki/run/config.json';
-        let profile = {};
-        if (access(filepath, 'r')) {
-            const process = popen(`cat ${filepath}`);
-            if (process) {
-                profile = json(process);
-                process.close();
-            }
-        }
+                args: { defaults: {} },
+		call: function(req) {
+			let profile = {};
+			const defaults = req.args?.defaults ?? {};
+			const filepath = '/etc/nikki/run/config.json';
+			const tmpFilepath = '/var/run/nikki/profile.json';
+			if (access(filepath, 'r')) {
+				writefile(tmpFilepath, defaults);
+				const command = `jq -s '.[0] * .[1]' ${tmpFilepath} ${filepath}`;
+				const process = popen(command);
+				if (process) {
+					profile = json(process);
+					process.close();
+				}
+			}
         return profile;
     }
 },
