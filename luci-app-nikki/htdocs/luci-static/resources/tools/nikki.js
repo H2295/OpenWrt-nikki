@@ -1,3 +1,4 @@
+
 'use strict';
 'require baseclass';
 'require uci';
@@ -25,13 +26,6 @@ const callNikkiVersion = rpc.declare({
     expect: { '': {} }
 });
 
-const callNikkiProfile = rpc.declare({
-    object: 'luci.nikki',
-    method: 'profile',
-    params: [ 'defaults' ],
-    expect: { '': {} }
-});
-
 const callNikkiUpdateSubscription = rpc.declare({
     object: 'luci.nikki',
     method: 'update_subscription',
@@ -54,7 +48,6 @@ const callNikkiDebug = rpc.declare({
 const homeDir = '/etc/nikki';
 const profilesDir = `${homeDir}/profiles`;
 const subscriptionsDir = `${homeDir}/subscriptions`;
-//const mixinFilePath = `${homeDir}/mixin.yaml`;
 const runDir = `${homeDir}/run`;
 const runProfilePath = `${runDir}/config.json`;
 const providersDir = `${runDir}/providers`;
@@ -99,18 +92,29 @@ return baseclass.extend({
         return callNikkiVersion();
     },
 
-    profile: function (defaults) {
-        return callNikkiProfile(defaults);
+    getNikkiConfig: function() {
+        return L.resolveDefault(fs.read_direct('/etc/nikki/run/config.json')).then(function(res) {
+            try {
+                const config = JSON.parse(res);
+                const clashApi = config.experimental?.clash_api;
+                return {
+                    'external-controller': clashApi?.external_controller,
+                    'secret': clashApi?.secret,
+                };
+            } catch (e) {
+                return {};
+            }
+        });
     },
-
+    
     updateSubscription: function (section_id) {
         return callNikkiUpdateSubscription(section_id);
     },
 
     api: async function (method, path, query, body) {
-        const profile = await callNikkiProfile({ 'external_controller': null, 'secret': null });
-        const apiListen = profile['external_controller'];
-        const apiSecret = profile['secret'] ?? '';
+        const config = await this.getNikkiConfig();
+        const apiListen = config['external-controller'];
+        const apiSecret = config['secret'] ?? '';
         const apiPort = apiListen.substring(apiListen.lastIndexOf(':') + 1);
         const url = `http://${window.location.hostname}:${apiPort}${path}`;
         return request.request(url, {
@@ -122,10 +126,9 @@ return baseclass.extend({
     },
 
     openDashboard: async function () {
-        const profile = await callNikkiProfile({ 'external-ui-name': null,  'external_controller': null, 'secret': null });
-        const uiName = profile['external-ui-name'];
-        const apiListen = profile['external_controller'];
-        const apiSecret = profile['secret'] ?? '';
+        const config = await this.getNikkiConfig();
+        const apiListen = config['external-controller'];
+        const apiSecret = config['secret'] ?? '';
         const apiPort = apiListen.substring(apiListen.lastIndexOf(':') + 1);
         const params = {
             host: window.location.hostname,
@@ -134,12 +137,7 @@ return baseclass.extend({
             secret: apiSecret
         };
         const query = new URLSearchParams(params).toString();
-        let url;
-        if (uiName) {
-            url = `http://${window.location.hostname}:${apiPort}/${uiName}/?${query}`;
-        } else {
-            url = `http://${window.location.hostname}:${apiPort}/ui/?${query}`;
-        }
+        const url = `http://${window.location.hostname}:${apiPort}/ui/?${query}`;
         setTimeout(function () { window.open(url, '_blank') }, 0);
     },
 
