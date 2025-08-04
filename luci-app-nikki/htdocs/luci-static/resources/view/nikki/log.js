@@ -11,12 +11,14 @@ return view.extend({
         return Promise.all([
             uci.load('nikki'),
             nikki.getAppLog(),
-            nikki.getCoreLog()
+            nikki.getCoreLog(),
+            nikki.getUpdateLog
         ]);
     },
     render: function (data) {
         const appLog = data[1];
         const coreLog = data[2];
+        const updateLog = data[3];
 
         let m, s, o;
 
@@ -90,32 +92,31 @@ return view.extend({
             element.scrollTop = element.scrollHeight;
         };
 
-        s.tab('debug_log', _('Debug Log'));
+        s.tab('update_log', _('Update Log'));
 
-        o = s.taboption('debug_log', form.Button, '_generate_download_debug_log');
-        o.inputstyle = 'negative';
-        o.inputtitle = _('Generate & Download');
-        o.onclick = function () {
-            return nikki.debug().then(function () {
-                fs.read_direct(nikki.debugLogPath, 'blob').then(function (data) {
-                    // create url
-                    const url = window.URL.createObjectURL(data, { type: 'text/markdown' });
-                    // create link
-                    const link = document.createElement('a');
-                    link.href = url;
-                    link.download = 'debug.log';
-                    // append to body
-                    document.body.appendChild(link);
-                    // download
-                    link.click();
-                    // remove from body
-                    document.body.removeChild(link);
-                    // revoke url
-                    window.URL.revokeObjectURL(url);
-                });
-            });
+        o = s.taboption('update_log', form.TextValue, '_update_log');
+        o.rows = 25;
+        o.wrap = false;
+        o.load = function (section_id) {
+            return updateLog;
         };
+        o.write = function (section_id, formvalue) {
+            return true;
+        };
+        poll.add(L.bind(function () {
+            const option = this;
+            return L.resolveDefault(nikki.getUpdateLog()).then(function (log) {
+                option.getUIElement('log').setValue(log);
+            });
+        }, o));
 
+        o = s.taboption('update_log', form.Button, 'scroll_update_log_to_bottom');
+        o.inputtitle = _('Scroll To Bottom');
+        o.onclick = function (_, section_id) {
+            const element = m.lookupOption('_update_log', section_id)[0].getUIElement(section_id).node.firstChild;
+            element.scrollTop = element.scrollHeight;
+        };
+        
         return m.render();
     },
     handleSaveApply: null,
