@@ -51,9 +51,9 @@ const methods = {
 			return { users: users, groups: groups, cgroups: cgroups };
 		}
 	},
-	debug: {
+	upgrade: {
 		call: function() {
-			const success = system('/etc/nikki/scripts/debug.sh > /var/log/nikki/debug.log') == 0;
+			const success = system('/etc/nikki/scripts/update.sh > /var/log/nikki/update.log &') == 0;
 			return { success: success };
 		}
 	}
