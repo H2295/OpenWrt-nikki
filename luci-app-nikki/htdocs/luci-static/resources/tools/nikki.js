@@ -39,9 +39,9 @@ const callNikkiGetIdentifiers = rpc.declare({
     expect: { '': {} }
 });
 
-const callNikkiDebug = rpc.declare({
+const callNikkiUpgrade = rpc.declare({
     object: 'luci.nikki',
-    method: 'debug',
+    method: 'upgrade',
     expect: { '': {} }
 });
 
@@ -56,7 +56,7 @@ const proxyProvidersDir = `${providersDir}/proxy`;
 const logDir = `/var/log/nikki`;
 const appLogPath = `${logDir}/app.log`;
 const coreLogPath = `${logDir}/core.log`;
-const debugLogPath = `${logDir}/debug.log`;
+const updateLogPath = `${logDir}/update.log`;
 const nftDir = `${homeDir}/nftables`;
 const reservedIPNFT = `${nftDir}/reserved_ip.nft`;
 const reservedIP6NFT = `${nftDir}/reserved_ip6.nft`;
@@ -72,7 +72,7 @@ return baseclass.extend({
     proxyProvidersDir: proxyProvidersDir,
     appLogPath: appLogPath,
     coreLogPath: coreLogPath,
-    debugLogPath: debugLogPath,
+    updateLogPath: updateLogPath,
     reservedIPNFT: reservedIPNFT,
     reservedIP6NFT: reservedIP6NFT,
 
@@ -141,6 +141,10 @@ return baseclass.extend({
         setTimeout(function () { window.open(url, '_blank') }, 0);
     },
 
+    upgrade: function () {
+    return callNikkiUpgrade();
+    },
+
     updateDashboard: function () {
         return this.api('POST', '/upgrade/ui');
     },
@@ -167,6 +171,10 @@ return baseclass.extend({
 
     getCoreLog: function () {
         return L.resolveDefault(fs.read_direct(this.coreLogPath));
+    },
+
+    getUpdateLog: function () {
+        return L.resolveDefault(fs.read_direct(this.updateLogPath));
     },
 
     clearAppLog: function () {
