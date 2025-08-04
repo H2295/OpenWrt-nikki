@@ -126,8 +126,8 @@ msgstr ""
 msgid "DNS Mode"
 msgstr ""
 
-#: applications/luci-app-nikki/htdocs/luci-static/resources/view/nikki/log.js:93
-msgid "Debug Log"
+#: applications/luci-app-nikki/htdocs/luci-static/resources/view/nikki/log.js:95
+msgid "Update Log"
 msgstr ""
 
 #: applications/luci-app-nikki/htdocs/luci-static/resources/view/nikki/mixin.js:507
