@@ -133,9 +133,9 @@ msgstr "DNS 监听"
 msgid "DNS Mode"
 msgstr "DNS 模式"
 
-#: applications/luci-app-nikki/htdocs/luci-static/resources/view/nikki/log.js:93
-msgid "Debug Log"
-msgstr "调试日志"
+#: applications/luci-app-nikki/htdocs/luci-static/resources/view/nikki/log.js:95
+msgid "Update Log"
+msgstr "升级日志"
 
 #: applications/luci-app-nikki/htdocs/luci-static/resources/view/nikki/mixin.js:507
 msgid "Destination IP"
