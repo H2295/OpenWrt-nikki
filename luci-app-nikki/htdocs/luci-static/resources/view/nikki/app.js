@@ -78,6 +78,19 @@ return view.extend({
             return nikki.restart();
         };
 
+        o = s.option(form.Button, 'update_core');
+        o.inputstyle = 'positive';
+        o.inputtitle = _('Update Dev Core');
+        o.onclick = function () {
+            return nikki.upgrade().then(function(res) {
+				if (res.success) {
+					ui.addNotification(null, E('p', _('Update request sent. Check the update log for progress.')));
+				} else {
+					ui.addNotification(null, E('p', _('Failed to send update request.')));
+				}
+			});
+        };
+
         o = s.option(form.Button, 'open_dashboard');
         o.inputtitle = _('Open Dashboard');
         o.onclick = function () {
