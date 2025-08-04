@@ -905,7 +905,7 @@ msgid "Update At"
 msgstr ""
 
 #: applications/luci-app-nikki/htdocs/luci-static/resources/view/nikki/app.js:83
-msgid "Update Dashboard"
+msgid "Update Dev Core"
 msgstr ""
 
 #: applications/luci-app-nikki/htdocs/luci-static/resources/view/nikki/mixin.js:479
