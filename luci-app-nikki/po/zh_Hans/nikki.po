@@ -912,8 +912,8 @@ msgid "Update At"
 msgstr "更新时间"
 
 #: applications/luci-app-nikki/htdocs/luci-static/resources/view/nikki/app.js:83
-msgid "Update Dashboard"
-msgstr "更新面板"
+msgid "Update Dev Core"
+msgstr "更新到ev内核"
 
 #: applications/luci-app-nikki/htdocs/luci-static/resources/view/nikki/mixin.js:479
 msgid "Update Interval"
