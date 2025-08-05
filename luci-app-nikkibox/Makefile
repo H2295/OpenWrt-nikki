@@ -1,7 +1,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=luci-app-nikkibox
-PKG_VERSION:=1.23.2
+PKG_VERSION:=1.23.3
 
 LUCI_TITLE:=LuCI Support for nikkibox
 LUCI_PKGARCH:=all
