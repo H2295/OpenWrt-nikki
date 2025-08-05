@@ -1,0 +1,6 @@
+/etc/nikkibox/profiles/
+/etc/nikkibox/subscriptions/
+/etc/nikkibox/run/providers/rule/
+/etc/nikkibox/run/providers/proxy/
+/etc/nikkibox/nftables/reserved_ip.nft
+/etc/nikkibox/nftables/reserved_ip6.nft

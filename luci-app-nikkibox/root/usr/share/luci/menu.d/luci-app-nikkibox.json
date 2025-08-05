@@ -1,0 +1,52 @@
+{
+    "admin/services/nikkibox": {
+        "title": "nikkibox",
+        "action": {
+            "type": "firstchild"
+        },
+        "depends": {
+            "acl": [ "luci-app-nikkibox" ],
+            "uci": { "nikkibox": true }
+        }
+    },
+    "admin/services/nikkibox/config": {
+        "title": "App Config",
+        "order": 10,
+        "action": {
+            "type": "view",
+            "path": "nikkibox/app"
+        }
+    },
+    "admin/services/nikkibox/profile": {
+        "title": "Profile",
+        "order": 20,
+        "action": {
+            "type": "view",
+            "path": "nikkibox/profile"
+        }
+    },
+    "admin/services/nikkibox/proxy": {
+        "title": "Proxy Config",
+        "order": 30,
+        "action": {
+            "type": "view",
+            "path": "nikkibox/proxy"
+        }
+    },
+    "admin/services/nikkibox/editor": {
+        "title": "Editor",
+        "order": 40,
+        "action": {
+            "type": "view",
+            "path": "nikkibox/editor"
+        }
+    },
+    "admin/services/nikkibox/log": {
+        "title": "Log",
+        "order": 60,
+        "action": {
+            "type": "view",
+            "path": "nikkibox/log"
+        }
+    }
+}

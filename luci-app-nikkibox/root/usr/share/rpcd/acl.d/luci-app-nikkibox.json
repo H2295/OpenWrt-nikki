@@ -1,0 +1,37 @@
+{
+    "luci-app-nikkibox": {
+        "description": "Grant access to nikkibox procedures",
+        "read": {
+            "uci": [ "nikkibox" ],
+            "ubus": {
+                "rc": [ "*" ],
+                "luci.nikkibox": [ "*" ]
+            },
+            "file": {
+                "/etc/nikkibox/profiles/*.json": ["read"],
+                "/etc/nikkibox/subscriptions/*.json": ["read"],
+                "/etc/nikkibox/mixin.json": ["read"],
+                "/etc/nikkibox/run/config.json": ["read"],
+                "/etc/nikkibox/run/providers/rule/*": ["read"],
+                "/etc/nikkibox/run/providers/proxy/*": ["read"],
+                "/etc/nikkibox/nftables/reserved_ip.nft": ["read"],
+                "/etc/nikkibox/nftables/reserved_ip6.nft": ["read"],
+                "/var/log/nikkibox/*.log": ["read"]
+            }
+        },
+        "write": {
+            "uci": [ "nikkibox" ],
+            "file": {
+                "/etc/nikkibox/profiles/*.json": ["write"],
+                "/etc/nikkibox/subscriptions/*.json": ["write"],
+                "/etc/nikkibox/mixin.json": ["write"],
+                "/etc/nikkibox/run/config.json": ["write"],
+                "/etc/nikkibox/run/providers/rule/*": ["write"],
+                "/etc/nikkibox/run/providers/proxy/*": ["write"],
+                "/etc/nikkibox/nftables/reserved_ip.nft": ["write"],
+                "/etc/nikkibox/nftables/reserved_ip6.nft": ["write"],
+                "/var/log/nikkibox/*.log": ["write"]
+            }
+        }
+    }
+}
