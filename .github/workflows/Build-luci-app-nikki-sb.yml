@@ -47,7 +47,7 @@ jobs:
           name: luci-app-nikkibox-ipk
           path: |
             openwrt-sdk-ipk/bin/packages/*/base/luci-app-nikki*.ipk
-            openwrt-sdk-ipk/bin/packages/*/base/luci-i18n-nikki*.ip 
+            openwrt-sdk-ipk/bin/packages/*/base/luci-i18n-nikki*.ipk
 
       # 编译 APK 包
       - name: Download OpenWrt snapshot (APK) SDK
