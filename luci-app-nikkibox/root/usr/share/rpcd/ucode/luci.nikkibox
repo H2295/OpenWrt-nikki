@@ -53,7 +53,7 @@ const methods = {
 	},
 	upgrade: {
 		call: function() {
-			const success = system('/etc/nikkibox/scripts/update.sh > /var/log/nikkibox/update.log &') == 0;
+			const success = system('/etc/nikkibox/scripts/updatecore.sh > /var/log/nikkibox/update.log &') == 0;
 			return { success: success };
 		}
 	}
