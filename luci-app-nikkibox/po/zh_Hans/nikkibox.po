@@ -918,7 +918,7 @@ msgstr "更新时间"
 
 #: applications/luci-app-nikkibox/htdocs/luci-static/resources/view/nikkibox/app.js:83
 msgid "Update Dev Core"
-msgstr "更新到ev内核"
+msgstr "更新Dev内核"
 
 #: applications/luci-app-nikkibox/htdocs/luci-static/resources/view/nikkibox/mixin.js:479
 msgid "Update Interval"
