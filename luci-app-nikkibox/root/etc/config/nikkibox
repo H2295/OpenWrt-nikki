@@ -59,14 +59,17 @@ config router_access_control
 	list 'cgroup' 'services/tailscale'
 	list 'cgroup' 'services/zerotier'
 	option 'proxy' '0'
+    option 'dns' '0'
 
 config router_access_control
 	option 'enabled' '1'
 	option 'proxy' '1'
+    option 'dns' '1'
 
 config lan_access_control
 	option 'enabled' '1'
 	option 'proxy' '1'
+    option 'dns' '1'
 
 config routing 'routing'
 	option 'tproxy_fw_mark' '0x80'
