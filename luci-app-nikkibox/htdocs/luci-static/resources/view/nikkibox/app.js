@@ -35,7 +35,7 @@ return view.extend({
 
         let m, s, o;
 
-        m = new form.Map('nikkibox', _('nikkibox'), `${_('Transparent Proxy with sing-box on OpenWrt.Redirect_port:7891.Tproxy_port:7892.DNS_port:1053')} <a href="https://github.com/nikkiboxnikkibox-org/OpenWrt-nikkibox/wiki" target="_blank">${_('How To Use')}</a>`);
+        m = new form.Map('nikkibox', _('Nikkibox'), `${_('Transparent Proxy with sing-box on OpenWrt.Redirect_port:7891.Tproxy_port:7892.DNS_port:1053')} <a href="https://github.com/nikkiboxnikkibox-org/OpenWrt-nikkibox/wiki" target="_blank">${_('How To Use')}</a>`);
 
         s = m.section(form.TableSection, 'status', _('Status'));
         s.anonymous = true;
