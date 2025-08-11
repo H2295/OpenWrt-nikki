@@ -21,7 +21,7 @@ Transparent Proxy with Sing-box on OpenWrt.
 ## Uninstall & Reset
 
 ```shell
-wget -O - https://github.com/nikkinikki-org/OpenWrt-nikki/raw/refs/heads/nikkibox/uninstall.sh | ash
+wget -O - https://github.com/H2295/OpenWrt-nikki/raw/refs/heads/nikkibox/uninstall.sh | ash
 ```
 
 
@@ -39,7 +39,7 @@ Note that the steps above may change base on config.
 
 ```shell
 # add feed
-echo "src-git nikki https://github.com/nikkinikki-org/OpenWrt-nikki.git;nikkibox" >> "feeds.conf.default"
+echo "src-git nikki https://github.com/H2295/OpenWrt-nikki.git;nikkibox" >> "feeds.conf.default"
 # update & install feeds
 ./scripts/feeds update -a
 ./scripts/feeds install -a
