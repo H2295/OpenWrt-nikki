@@ -28,7 +28,7 @@ wget -O - https://github.com/H2295/OpenWrt-nikki/raw/refs/heads/nikkibox/uninsta
 ## How does it work
 
 1. Mixin and Update profile.
-2. Run mihomo.
+2. Run singbox.
 3. Set scheduled restart.
 4. Set ip rule/route
 5. Generate nftables and apply it.
